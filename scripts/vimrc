@@ -1,0 +1,28 @@
+call plug#begin()
+Plug 'dense-analysis/ale'
+Plug 'tpope/vim-sensible'
+Plug 'nvie/vim-flake8'
+Plug 'vim-python/python-syntax'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'quarto-dev/quarto-vim'
+Plug 'dense-analysis/ale'
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'prabirshrestha/vim-lsp'
+Plug 'tpope/vim-commentary'
+call plug#end()
+let g:flake8_on_save = 1
+if executable('ruff')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff',
+        \ 'cmd': {server_info->['ruff', 'server']},
+        \ 'allowlist': ['python'],
+        \ 'workspace_config': {},
+        \ })
+endif
+" Linters
+let g:ale_linters = { "python": ["ruff"] }
+" Fixers
+let g:ale_fixers = { "python": ["ruff", "ruff_format"] }
+let b:commentary_format = '# %s'
+let b:commentary_startofline = 1
+

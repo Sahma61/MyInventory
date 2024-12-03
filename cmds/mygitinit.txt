@@ -1,0 +1,57 @@
+.TH gitinit 1 "December 2024" "1.0" "User Commands"
+.SH NAME
+gitinit \- Initialize a Git repository with a specific .gitignore file
+
+.SH SYNOPSIS
+.B gitinit
+.I <language>
+
+.SH DESCRIPTION
+The
+.B gitinit
+command initializes a new Git repository in the current directory and sets up a `.gitignore` file based on the provided programming language. If the `.gitignore` file is not found locally, it clones the `gitignore` repository from GitHub, retrieves the appropriate file, and sets it up in the working directory.
+
+The command is useful for quickly setting up a Git repository with an appropriate `.gitignore` file for a given programming language.
+
+.SH OPTIONS
+.I <language>
+The programming language (e.g., "python", "node", "java") for which the corresponding `.gitignore` file will be used.
+
+.SH EXAMPLES
+
+.TP
+To initialize a new Git repository with a `.gitignore` file for Python:
+
+.B gitinit python
+
+.TP
+To initialize a new Git repository with a `.gitignore` file for Node.js:
+
+.B gitinit node
+
+.SH USAGE
+
+1. The user should provide the name of the programming language when running the `gitinit` command. For example:
+   .B gitinit java
+   
+2. If the `gitignore` folder does not exist in the user's home directory, the script will clone the official `gitignore` repository from GitHub into `$HOME/gitignore`.
+
+3. Once the repository is cloned (or if it already exists), the script will search for a `.gitignore` file that matches the provided language name. The file will be copied to the current working directory and renamed `.gitignore`.
+
+4. A Git repository will then be initialized in the current directory, if one does not already exist.
+
+.SH EXIT STATUS
+The `gitinit` command exits with the following status codes:
+.TP
+0
+The command was successful and the repository was initialized with the appropriate `.gitignore` file.
+.TP
+1
+An error occurred. This could be due to missing arguments, failed cloning of the repository, or other issues (e.g., file not found or git init failure).
+
+.SH AUTHOR
+Written by [Sahma Anwar].
+
+.SH SEE ALSO
+git(1), gitignore(5)
+
